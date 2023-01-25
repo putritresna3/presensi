@@ -1,0 +1,66 @@
+{% extends 'base.html'%} 
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        Data Siswa
+        <a href="{% url 'tambah_siswa' %}">Tambah</a>
+      </h3>
+
+      {% for message in messages %} {% if message %}
+      <div class="alert alert-success">{{ message }}</div>
+      {% endif %} 
+      {% endfor %}
+      <table class="table table-bordered table-strip">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Jabatan</th>
+            <th>Tanggal</th>
+            <th>Keterangan_id</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in siswa %}
+          <tr>
+            <td><a href="{% url 'ubah_siswa' s.id %}">{{ s.nama }}</a></td>
+            <td>{{ s.kelas }}</td>
+            <td>{{ s.jabatan }}</td>
+            <td>{{ s.tgl }}</td>
+            <td>{{ s.keterangan_id }}</td>
+            <td>
+              <!-- <button data-toggle="modal" data-target="#hapus-{{ siswa.id }}" class="btn btn-danger">Hapus</button> -->
+              <a href="{% url 'hapus_siswa' s.id %}" class="btn btn-danger">Hapus</a>
+            </td>
+
+            <!-- <div class="modal" id="hapus-{{s.id}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class="modal-tittle">
+                      <h3>Hapus</h3>
+                    </div>
+                  </div>
+                  <div class="modal-body">
+                    Apakah Anda Yakin Ingin Menghapus Data Tersebut <strong>{{ siswa.nama | upper }}</strong>?
+                  </div>
+                  <div class="modal-footer">
+                    
+                    <button class="btn btn-dark" data-dismiss="modal">Tidak</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
